@@ -15,10 +15,29 @@ class TodosController extends Controller
      */
     public function index()
     {
-        $todos = Todo::where("id_user" , Auth::user()->id)->orderBy('status')->get();
+        $todos = Todo::where("id_user" , Auth::user()->id)->orderBy('status')
+        ->where('status', 0)
+        ->get();
+        $todos1 = Todo::where("id_user" , Auth::user()->id)->orderBy('status')
+        ->where('status', 1)
+        ->get();
+
         //dd($todos);
         return Inertia::render('Todos/Index' , [
-            'todos' => $todos
+            'todos' => $todos,
+            'todos1' => $todos1,
+        ]);
+    }
+
+    public function finalizadas()
+    {
+        $todos = Todo::where("id_user" , Auth::user()->id)->orderBy('status')
+        ->where('status', 2)
+        ->get();
+
+        //dd($todos);
+        return Inertia::render('Todos/Finalizadas' , [
+            'todos' => $todos,
         ]);
     }
 
@@ -52,7 +71,17 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+        ]);
+
+        Todo::create([
+            'title' => $request->title,
+            'status' => 0,
+            'id_user' => Auth::user()->id
+        ]);
+
+        return back();
     }
 
     /**
