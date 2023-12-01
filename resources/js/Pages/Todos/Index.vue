@@ -39,6 +39,7 @@ const closeModal = () => {
 
 const ok = () => {
     form.reset();
+    closeModal();
 };
 
 const save = () => {
@@ -47,7 +48,6 @@ const save = () => {
             ok();
         },
     });
-    closeModal();
 };
 </script>
 

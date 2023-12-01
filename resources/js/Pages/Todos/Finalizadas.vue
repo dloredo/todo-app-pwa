@@ -9,7 +9,36 @@ const props = defineProps({
 
 const form = useForm({
     id: "",
+    title: "",
 });
+
+const changeStatus = (id) => {
+    //console.log("change status");
+    form.get(route("changeStatus", id));
+};
+
+const openModal = () => {
+    modal.value = true;
+    title.value = "Crear tarea";
+};
+
+const closeModal = () => {
+    modal.value = false;
+    form.reset();
+};
+
+const ok = () => {
+    form.reset();
+    closeModal();
+};
+
+const save = () => {
+    form.post(route("todoStore"), {
+        onSuccess: () => {
+            ok();
+        },
+    });
+};
 </script>
 
 <template>
@@ -23,6 +52,7 @@ const form = useForm({
                 <div
                     class="flex flex-row items-center p-2 rounded-lg shadow-lg cursor-pointer lg:flex-col md:flex-col"
                     v-for="todo in todos"
+                    @click="($event) => changeStatus(todo.id)"
                     v-bind:class="
                         todo.status == 0
                             ? 'bg-red-500 text-white'
