@@ -21,12 +21,7 @@ Route::get('/offline', function () {
 });
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect('/dashboard');
 });
 
 Route::get('/dashboard', [ TodosController::class, 'index' ])->middleware(['auth', 'verified'])->name('dashboard');

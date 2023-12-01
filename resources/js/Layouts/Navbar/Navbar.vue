@@ -17,7 +17,7 @@ import { Link } from "@inertiajs/vue3";
 
                     <Search />
 
-                    <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    <div class="sm:flex sm:items-center sm:ms-6">
                         <!-- Settings Dropdown -->
                         <div class="relative ms-3">
                             <Dropdown align="right" width="48">

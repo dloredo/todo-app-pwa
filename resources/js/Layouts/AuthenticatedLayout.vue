@@ -9,7 +9,7 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div class="bg-white">
         <Navbar />
-        <main>
+        <main class="py-8">
             <slot />
         </main>
         <MenuMovil />
